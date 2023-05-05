@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+	<link href="styles/nav.css" rel="stylesheet">
+	<link href="styles/main.css" rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script type="module" src="js/pocketbase/authentication.js" defer></script>
+</head>
+<body>
+    <nav>
+		<div class="logo">
+			<span class="material-symbols-outlined">
+				terminal
+			</span>
+            <h1><a href="index.html">CodeTracker</a></h1>
+		</div>
+		<ul>
+			<li><a href="login.html">Login</a></li>
+			<li><a href="register.html">Register</a></li>
+		</ul>
+	</nav>
+    <form>
+        <label for="username">
+            username
+            <input type="text" id="login-username" placeholder="username">
+        </label>
+        <label for="password">
+            password
+            <input type="password" id="login-password" placeholder="password">
+        </label>
+        <button onclick="login(e)">Login</button>
+        <a href="register.html">Don't have an account? Sign up</a>
+    </form>
+</body>
+</html>
