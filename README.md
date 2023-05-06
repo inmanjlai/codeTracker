@@ -9,6 +9,8 @@ User authentication is handled by PocketBase, using their provided JavaScript SD
 CodeMirror is imported into `index.html` with these two lines:
 
 ```html
+index.html
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"></link>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
 ```
@@ -16,13 +18,13 @@ CodeMirror is imported into `index.html` with these two lines:
 The basic implementation just consists of creating an instantiation of the CodeMirror class, and passing in an HTML element to be the parent of the editor. In our case this is the div element with an id of editor.
 
 ```html
-#editor element that is injected into the CodeMirror instance
+index.html
 
 <body>
 	...
 	<main>
 		...
-		<div id="editor"></div>
+		<div id="editor"></div> // editor element that is injected into the CodeMirror instance
 	</main>
 	...
 </body>
@@ -54,13 +56,14 @@ Lines 3 - 10 are extra configuration for the editor, such as `lineNumbers`, `tab
 Syntax highlighting is possible through an extra import in the `index.html` file
 
 ```html
+index.html
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/python/python.min.js"></script>
 ```
 
-
 ### Skulpt
 
-Skulpt lives in `js/skulpt/` 
+Skulpt lives in `js/skulpt/`
 
 The only file to consider is the `run.js` file, which basically selects two elements in the DOM, an input element, and an output element.
 
@@ -103,6 +106,8 @@ function runit() {
 The `runit()` function is being called by an `onclick` event on a button in `index.html`
 
 ```html
+index.html
+
 <button type="button" onclick="runit()">
         Run
 	<span class="material-symbols-outlined">
@@ -123,11 +128,13 @@ index.html
 const pb = new PocketBase(PB_URL)
 ```
 
-login 
+`login()`
 
 await the authWithPassword method and once that succeeds we just redirect back to the homepage.
 
 ```javascript
+index.html
+
 async function login() {
 	const loginUsername = document.getElementById('login-username').value;
         const loginPassword = document.getElementById('login-password').value;
@@ -142,9 +149,11 @@ async function login() {
 }
 ```
 
-signUp
+`signUp()`
 
 ```javascript
+register.html
+
 async function signUp() {
 	const username = document.querySelector('#signup-username').value;
         const email = document.querySelector('#signup-email').value;
@@ -167,11 +176,13 @@ async function signUp() {
 }
 ```
 
-logout 
+`logout()`
 
 Mainly just removing the `pocketbase_auth` object from localStorage and reloading the window
 
 ```javascript
+index.html
+
 async function logout() {
 	localStorage.removeItem('pocketbase_auth')
 	window.location.reload()
