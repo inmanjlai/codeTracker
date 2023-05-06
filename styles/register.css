@@ -13,7 +13,7 @@
     height: max-content;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     padding: 40px 0 40px 0;
     border-radius: 8px;
     border: 2px solid black;
@@ -23,18 +23,27 @@
 
 .register-form label {
     display: flex;
-    flex-direction: column;
     gap: 10px;
     width: 80%;
+    align-items: center;
+}
+
+.register-form label span {
+    color: rgba(255, 0, 0, 0.7);
 }
 
 .register-form input {
+    width: 80%;
     padding: 10px;
     border: none;
     background-color: rgb(213, 213, 213);
     border-radius: 5px;
     font-size: 16px;
     font-family: 'Roboto Mono', monospace;
+}
+
+.register-form input:focus-visible {
+    outline: none;
 }
 
 .register-form button {
@@ -47,6 +56,7 @@
     cursor: pointer;
     padding: 12px 24px;
     transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
 .register-form button:hover {
@@ -55,4 +65,21 @@
 
 .register-form a:hover {
     text-decoration: underline;
+}
+
+#signup-confirm-password {
+    transition: background-color 0.3s;
+    /* background-color: rgb(129, 225, 150); */
+}
+
+.register-form button:disabled {
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+}
+
+#error-field {
+    width: 80%;
+    background-color: rgba(255, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 5px;
 }

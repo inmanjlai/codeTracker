@@ -4,6 +4,7 @@ window.onload = () => {
 
     if (localStorage.getItem('pocketbase_auth') == null) {
         modalContent.innerHTML = `
+            <p id='error-field' style='display:none'>Your username/email and password combination was incorrect</p>
             <label for="username">
                 username / email
                 <input type="text" id="login-username" placeholder="username / email">

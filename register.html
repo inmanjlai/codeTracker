@@ -14,6 +14,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+    <script src="js/reactivity/formValidation.js" defer></script>
 </head>
 <body>
     <nav>
@@ -29,23 +30,21 @@
 	</nav>
     <div class="register-form-container">
         <div class="register-form">
-            <label for="username">
-                username
-                <input type="text" id="signup-username" name="username" placeholder="username">
-            </label>
-            <label for="email">
-                username
-                <input type="email" id="signup-email" name="email" placeholder="email">
-            </label>
-            <label for="password">
-                password
-                <input type="password" id="signup-password" name="password" placeholder="password">
-            </label>
-            <label for="confirm-password">
-                password
-                <input type="password" id="signup-confirm-password" name="confirm-password" placeholder="confirm password">
-            </label>
-            <button onclick="signUp()">Register</button>
+            <p id="error-field" style="display:none"></p>
+
+            <label for="username">username <span>*</span></label>
+            <input type="text" id="signup-username" name="username" placeholder="username">
+
+            <label for="email">email <span>*</span></label>
+            <input type="email" id="signup-email" name="email" placeholder="email">
+
+            <label for="password">password <span>*</span></label>
+            <input type="password" id="signup-password" name="password" placeholder="password" minlength="8">
+
+            <label for="confirm-password">confirm password <span>*</span></label>
+            <input type="password" id="signup-confirm-password" name="confirm-password" placeholder="confirm password" minlength="8">
+
+            <button onclick="signUp()" disabled="true">Register</button>
             <a href="index.html">Already have an account? Login</a>
         </div>
     </div>
@@ -53,9 +52,7 @@
     <script src="./config.js"></script>
     <script src="js/pocketbase/pocketbase.umd.js"></script>
     <script type="text/javascript">
-        const pb = new PocketBase("https://imanjlai.online:443")
-
-
+        const pb = new PocketBase(PB_URL)
 
         async function login() {
             const username = document.querySelector('#signup-username').value;
@@ -71,6 +68,8 @@
             const email = document.querySelector('#signup-email').value;
             const password = document.querySelector('#signup-password').value;
             const passwordConfirm = document.querySelector('#signup-confirm-password').value;
+
+            const errorField = document.querySelector('#error-field')
 
             const data = {
                 username, email, password, passwordConfirm

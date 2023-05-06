@@ -75,12 +75,25 @@ form textarea, pre {
   outline: none;
 }
 
-pre {
+.pre-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   background-color: rgb(230, 230, 230);
-  color: black;
   border-left: 2px solid black;
+}
+
+pre {
+  color: black;
 }
 
 textarea:focus-visible {
   outline-color: transparent;
+}
+
+#prompt {
+  background-color: transparent;
+  padding: 10px 15px;
+
 }

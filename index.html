@@ -24,6 +24,7 @@
 
 		<!-- REACTIVITY -->
 		<script src="js/reactivity/isLoggedIn.js"></script>
+		<script src="js/reactivity/displayPrompt.js"></script>
 	</head>
 
 	<body>
@@ -59,7 +60,10 @@
 				</form>
 			</div>
 			<!-- WHERE THE RUN OUTPUT WILL DISPLAY -->
-			<pre id="output"></pre>
+			<div class="pre-container">
+				<p id="prompt">user@codeTracker $</p>
+				<pre id="output"></pre>
+			</div>
 		</main>
 
 		<script src="js/pocketbase/pocketbase.umd.js"></script>
@@ -69,15 +73,21 @@
 					localStorage.removeItem('pocketbase_auth')
 					window.location.reload()
 				}
-            const pb = new PocketBase("https://imanjlai.online:443")
+            const pb = new PocketBase(PB_URL)
 
             async function login() {
                 const loginUsername = document.getElementById('login-username').value;
                 const loginPassword = document.getElementById('login-password').value;
+				const errorField = document.getElementById('error-field');
 
-                const user = await pb.collection('users').authWithPassword(loginUsername, loginPassword);
+				try {
+					const user = await pb.collection('users').authWithPassword(loginUsername, loginPassword);
+					window.location.href = BASE_URL + '/index.html'
+				} catch (e) {
+					errorField.style.display = 'block'
+				}
+
                 // BASE URL IS DEFINED IN THE CONFIG.JS FILE
-                window.location.href = BASE_URL + '/index.html'
             }
 		</script>
 	</body>
