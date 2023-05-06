@@ -1,0 +1,66 @@
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    place-items: center;
+}
+
+.modal-content {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: max-content;
+    width: 500px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 2px solid black;
+    padding: 40px 0 40px 0;
+    gap: 20px;
+}
+
+.modal-content label, .modal-content button, .modal-content a{
+    width: 80%;
+}
+
+.modal-content label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    background-color: rgb(213, 213, 213);
+    border: none;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content a:hover {
+    text-decoration: underline;
+}

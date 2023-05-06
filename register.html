@@ -7,15 +7,13 @@
     <title>Register</title>
 	<link href="styles/nav.css" rel="stylesheet">
 	<link href="styles/main.css" rel="stylesheet">
+	<link href="styles/register.css" rel="stylesheet">
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <script type="module" src="js/pocketbase/authentication.js" defer></script>
 </head>
 <body>
     <nav>
@@ -26,29 +24,66 @@
 			<h1><a href="index.html">CodeTracker</a></h1>
 		</div>
 		<ul>
-			<li><a href="login.html">Login</a></li>
-			<li><a href="register.html">Register</a></li>
+
 		</ul>
 	</nav>
-    <form>
-        <label for="username">
-            username
-            <input type="text" id="signup-username" name="username" placeholder="username">
-        </label>
-        <label for="email">
-            username
-            <input type="email" id="signup-email" name="email" placeholder="email">
-        </label>
-        <label for="password">
-            password
-            <input type="password" id="signup-password" name="password" placeholder="password">
-        </label>
-        <label for="confirm-password">
-            password
-            <input type="password" id="signup-confirm-password" name="confirm-password" placeholder="confirm password">
-        </label>
-        <button onclick="signUp(e)">Register</button>
-        <a href="login.html">Already have an account? Login</a>
-    </form>
+    <div class="register-form-container">
+        <div class="register-form">
+            <label for="username">
+                username
+                <input type="text" id="signup-username" name="username" placeholder="username">
+            </label>
+            <label for="email">
+                username
+                <input type="email" id="signup-email" name="email" placeholder="email">
+            </label>
+            <label for="password">
+                password
+                <input type="password" id="signup-password" name="password" placeholder="password">
+            </label>
+            <label for="confirm-password">
+                password
+                <input type="password" id="signup-confirm-password" name="confirm-password" placeholder="confirm password">
+            </label>
+            <button onclick="signUp()">Register</button>
+            <a href="index.html">Already have an account? Login</a>
+        </div>
+    </div>
+
+    <script src="./config.js"></script>
+    <script src="js/pocketbase/pocketbase.umd.js"></script>
+    <script type="text/javascript">
+        const pb = new PocketBase("https://imanjlai.online:443")
+
+
+
+        async function login() {
+            const username = document.querySelector('#signup-username').value;
+            const password = document.querySelector('#signup-password').value;
+
+            const user = await pb.collection('users').authWithPassword(username, password);
+            // BASE URL IS DEFINED IN THE CONFIG.JS FILE
+            window.location.href = BASE_URL + '/index.html'
+        }
+
+        async function signUp() {
+            const username = document.querySelector('#signup-username').value;
+            const email = document.querySelector('#signup-email').value;
+            const password = document.querySelector('#signup-password').value;
+            const passwordConfirm = document.querySelector('#signup-confirm-password').value;
+
+            const data = {
+                username, email, password, passwordConfirm
+            }
+
+            try {
+                console.log(data)
+                const createdUser = await pb.collection('users').create(data);
+                await login()
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    </script>
 </body>
 </html>

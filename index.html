@@ -1,54 +1,86 @@
 <html>
 
-<head>
-	<title>CodeTracker</title>
-	<link href="styles/nav.css" rel="stylesheet">
-	<link href="styles/main.css" rel="stylesheet">
+	<head>
+		<title>CodeTracker</title>
+		<link href="styles/nav.css" rel="stylesheet">
+		<link href="styles/main.css" rel="stylesheet">
+		<link href="styles/login.css" rel="stylesheet">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+		<!-- GOOGLE FONT/ICON IMPORTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<script src="js/run.js" defer></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
-<script src="js/skulpt.min.js" type="text/javascript" defer></script>
-<script src="js/skulpt-stdlib.js" type="text/javascript" defer></script>
-</head>
-<script src="js/textarea-tabsupport.js" defer></script>
+		<!-- SKULPT IMPORTS -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+		<script src="js/skulpt/run.js" defer></script>
+		<script src="js/skulpt/skulpt.min.js" type="text/javascript" defer></script>
+		<script src="js/skulpt/skulpt-stdlib.js" type="text/javascript" defer></script>
 
-<body>
-	<nav>
-		<div class="logo">
-			<span class="material-symbols-outlined">
-				terminal
-			</span>
-			<h1><a href="index.html">CodeTracker</a></h1>
-		</div>
-		<ul>
-			<li><a href="login.html">Login</a></li>
-			<li><a href="register.html">Register</a></li>
-		</ul>
-	</nav>
-	<main>
-		<div class="form-container">
-			<div class="repl-controls">
-				<p><strong><em>app.py</em></strong></p>
-				<button type="button" onclick="runit()">Run
-					<span class="material-symbols-outlined">
-						arrow_right
-					</span>
-				</button>
+		<!-- UTIL IMPORTS -->
+		<!-- <script src="js/utils/loading.js"></script> -->
+		<script src="js/utils/textarea-tabsupport.js" defer></script>
+
+		<!-- REACTIVITY -->
+		<script src="js/reactivity/isLoggedIn.js"></script>
+	</head>
+
+	<body>
+
+		<nav>
+			<div class="logo">
+				<span class="material-symbols-outlined">
+					terminal
+				</span>
+				<h1><a href="index.html">CodeTracker</a></h1>
 			</div>
-			<form>
-				<textarea id="yourcode" cols="40" rows="10">print('hello world')</textarea><br />
-			</form>
-		</div>
-		<!-- WHERE THE RUN OUTPUT WILL DISPLAY -->
-		<pre id="output"></pre>
-	</main>
-</body>
+			<ul class="user-auth-controls">
+
+			</ul>
+
+			<div class="modal-overlay">
+				<div class="modal-content">
+				</div>
+			</div>
+		</nav>
+
+		<main>
+			<div class="form-container">
+				<div class="repl-controls">
+					<p><strong><em>app.py</em></strong></p>
+					<button type="button" onclick="runit()">Run
+						<span class="material-symbols-outlined">
+							chevron_right
+						</span>
+					</button>
+				</div>
+				<form>
+					<textarea id="yourcode" cols="40" rows="10">print('hello world')</textarea><br />
+				</form>
+			</div>
+			<!-- WHERE THE RUN OUTPUT WILL DISPLAY -->
+			<pre id="output"></pre>
+		</main>
+
+		<script src="js/pocketbase/pocketbase.umd.js"></script>
+		<script src="./config.js"></script>
+		<script type="text/javascript">
+				async function logout() {
+					localStorage.removeItem('pocketbase_auth')
+					window.location.reload()
+				}
+            const pb = new PocketBase("https://imanjlai.online:443")
+
+            async function login() {
+                const loginUsername = document.getElementById('login-username').value;
+                const loginPassword = document.getElementById('login-password').value;
+
+                const user = await pb.collection('users').authWithPassword(loginUsername, loginPassword);
+                // BASE URL IS DEFINED IN THE CONFIG.JS FILE
+                window.location.href = BASE_URL + '/index.html'
+            }
+		</script>
+	</body>
 
 </html>
