@@ -2,6 +2,23 @@
 
 // output functions are configurable.  This one just appends some text
 // to a pre element.
+function buildEditor() {
+    const editor = CodeMirror(document.querySelector('#editor'), {
+        lineNumbers: true,
+        tabSize: 2,
+        value: ("print('hello world')"),
+        mode: {
+            name: "python",
+            version: 3,
+            singleLineStringErrors: false
+        },
+    })
+
+    return editor
+}
+
+const editor = buildEditor()
+
 function outf(text) {
     var mypre = document.getElementById("output");
     mypre.innerHTML = mypre.innerHTML + text;
@@ -18,9 +35,12 @@ function builtinRead(x) {
 // configure the output function
 // call Sk.importMainWithBody()
 function runit() {
-    var prog = document.getElementById("yourcode").value;
+    var prog = editor.getValue();
     var mypre = document.getElementById("output");
     mypre.innerHTML = '';
+
+    console.log(prog)
+
     Sk.pre = "output";
     Sk.configure({ output: outf, read: builtinRead });
     var myPromise = Sk.misceval.asyncToPromise(function () {

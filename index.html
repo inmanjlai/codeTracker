@@ -18,13 +18,14 @@
 		<script src="js/skulpt/skulpt.min.js" type="text/javascript" defer></script>
 		<script src="js/skulpt/skulpt-stdlib.js" type="text/javascript" defer></script>
 
-		<!-- UTIL IMPORTS -->
-		<!-- <script src="js/utils/loading.js"></script> -->
-		<script src="js/utils/textarea-tabsupport.js" defer></script>
-
 		<!-- REACTIVITY -->
 		<script src="js/reactivity/isLoggedIn.js"></script>
 		<script src="js/reactivity/displayPrompt.js"></script>
+
+		<!-- CODE MIRROR -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"></link>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/python/python.min.js"></script>
 	</head>
 
 	<body>
@@ -55,9 +56,10 @@
 						</span>
 					</button>
 				</div>
-				<form>
-					<textarea id="yourcode" cols="40" rows="10">print('hello world')</textarea><br />
-				</form>
+				<div id="editor">
+
+				</div>
+					<!-- <textarea id="yourcode" cols="40" rows="10">print('hello world')</textarea><br /> -->
 			</div>
 			<!-- WHERE THE RUN OUTPUT WILL DISPLAY -->
 			<div class="pre-container">

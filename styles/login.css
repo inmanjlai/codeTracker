@@ -6,7 +6,7 @@
     backdrop-filter: blur(5px);
     height: 100%;
     width: 100%;
-
+    z-index: 20;
     display: grid;
     place-items: center;
 }
@@ -74,4 +74,8 @@
     background-color: rgba(255, 0, 0, 0.2);
     padding: 10px;
     border-radius: 5px;
+}
+
+#editor {
+    height: 100%;
 }
