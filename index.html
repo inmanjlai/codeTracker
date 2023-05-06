@@ -71,10 +71,12 @@
 		<script src="js/pocketbase/pocketbase.umd.js"></script>
 		<script src="./config.js"></script>
 		<script type="text/javascript">
-				async function logout() {
-					localStorage.removeItem('pocketbase_auth')
-					window.location.reload()
-				}
+
+			async function logout() {
+				localStorage.removeItem('pocketbase_auth')
+				window.location.reload()
+			}
+
             const pb = new PocketBase(PB_URL)
 
             async function login() {
@@ -89,8 +91,8 @@
 					errorField.style.display = 'block'
 				}
 
-                // BASE URL IS DEFINED IN THE CONFIG.JS FILE
             }
+
 		</script>
 	</body>
 

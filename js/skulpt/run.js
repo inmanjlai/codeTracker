@@ -39,8 +39,6 @@ function runit() {
     var mypre = document.getElementById("output");
     mypre.innerHTML = '';
 
-    console.log(prog)
-
     Sk.pre = "output";
     Sk.configure({ output: outf, read: builtinRead });
     var myPromise = Sk.misceval.asyncToPromise(function () {
