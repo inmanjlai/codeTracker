@@ -114,3 +114,41 @@ textarea:focus-visible {
   height: 100%;
 
 }
+
+@media only screen and (max-width: 650px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 'input' 'output';
+  }
+
+  .form-container {
+    width: 100%;
+    grid-area: 'input';
+    max-height: 439px;
+  }
+
+  #editor {
+    width: 100%;
+    height: 100%;
+  }
+
+  .CodeMirror {
+    height: 100%;
+  }
+
+  .codemirror-scroll {
+    max-height: 390px;
+  }
+
+  #prompt {
+    border-top: 2px solid black;
+  }
+
+  .pre-container {
+    max-height: 439px;
+    border: none;
+    grid-area: 'output';
+  }
+}

@@ -79,3 +79,13 @@
 #editor {
     height: 100%;
 }
+
+@media only screen and (max-width: 650px) {
+    .modal-content {
+        width: 80%;
+    }
+
+    .modal-content a {
+        width: 80%;
+    }
+}
