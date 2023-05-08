@@ -1,10 +1,10 @@
 # CodeTracker
 
-## Dependancies
-
 CodeTracker is a simple online code editor, that makes use of CodeMirror's code editor and Skulpt's Python to JavaScript translator.
 
 User authentication is handled by PocketBase, using their provided JavaScript SDK.
+
+## Dependancies
 
 ### CodeMirror
 
