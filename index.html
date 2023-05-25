@@ -51,12 +51,22 @@
 		<main>
 			<div class="form-container">
 				<div class="repl-controls">
-					<p><strong><em>app.py</em></strong></p>
+					<div>
+						
+					<p contentEditable="true"><strong><em id="filename">app.py</em></strong></p>
+				</div>
+					<div>
+					<button type="button" style="float: left;" onclick="save()">Save
+						<span class="material-symbols-outlined">
+							cloud_download
+						</span>
+					</button>
 					<button type="button" onclick="runit()">Run
 						<span class="material-symbols-outlined">
 							chevron_right
 						</span>
 					</button>
+				</div>
 				</div>
 				<div id="editor">
 
