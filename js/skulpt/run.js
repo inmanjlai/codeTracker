@@ -18,6 +18,43 @@ function buildEditor() {
 }
 
 const editor = buildEditor()
+const events = [];
+async function logevent()
+{
+    var userid = pb.authStore.model.id;
+    // process all events and clear our the array
+    while(events.length > 0) {
+        // get each event
+        evt = events.pop();
+        // create data with event and user id
+        const data = {
+            "eventtype":evt,
+            "userid": userid
+        };
+        // write to database
+        const record = await pb.collection('events').create(data);
+        //console.log("log event");
+    }
+}
+editor.on("change",function(a,e){	
+    //debugger;
+
+    timestamp = Date.now();
+    e.timestamp = timestamp; 
+    var evnt = JSON.stringify(e);
+    
+    events.push(evnt);
+    console.log(events.length);
+    if(events.length > 10)
+    {
+        // log these events in the database
+        // clear out the events.
+        logevent();
+        
+    }
+
+});
+
 
 function outf(text) {
     var mypre = document.getElementById("output");
@@ -39,16 +76,54 @@ function runit() {
     var mypre = document.getElementById("output");
     mypre.innerHTML = '';
 
+    
+    {
+        // log all the  events in the database
+        // clear out the events.
+    }
     Sk.pre = "output";
-    Sk.configure({ output: outf, read: builtinRead });
-    var myPromise = Sk.misceval.asyncToPromise(function () {
-        return Sk.importMainWithBody("<stdin>", false, prog, true);
-    });
-    myPromise.then(function (mod) {
-        console.log('success');
-    },
-        function (err) {
-            console.log(err.toString());
-            mypre.innerHTML = err.toString()
+    if (prog.includes("turtle"))
+    {  
+        Sk.configure({output:outf, read:builtinRead}); 
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'output';
+        var myPromise = Sk.misceval.asyncToPromise(function() {
+            return Sk.importMainWithBody("<stdin>", false, prog, true);
         });
+    }
+
+    else
+    {
+        Sk.configure({ output: outf, read: builtinRead });
+        var myPromise = Sk.misceval.asyncToPromise(function () {
+            return Sk.importMainWithBody("<stdin>", false, prog, true);
+        });
+        myPromise.then(function (mod) {
+            console.log('success');
+        },
+            function (err) {
+                console.log(err.toString());
+                mypre.innerHTML = err.toString()
+            });
+    }
 }
+
+async function save()
+{
+    //formData = new FormData();
+    var file = document.getElementById('filename').innerHTML;
+    var code = editor.getValue();
+    var userid = pb.authStore.model.id;
+    //console.log(userid);
+    //formData.append(file,code); 
+    //const createdRecord = await pb.collection('codedocs').create(formData);
+    const data = {
+        "filename":file,
+        "code": code,
+        "userid": userid
+    };
+    console.log(data);
+    const record = await pb.collection('codedocs').create(data);
+    
+    
+}
+
