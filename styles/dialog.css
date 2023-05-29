@@ -51,19 +51,31 @@
     box-shadow: 0 0 10px palegreen;
 }
 
-.dialog-content button {
+.dialog-buttons-abs {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    /* left: 50%;
-    transform: translateX(-50%); */
+}
 
+.loadBtn {
     background-color: palegreen;
-    box-shadow: 0 0 10px palegreen;
+    box-shadow: 0 0 5px palegreen;
     font-size: 16px;
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.cancelBtn {
+    background-color: palevioletred;
+    box-shadow: 0 0 5px palevioletred;
+    font-size: 16px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
     cursor: pointer;
 }
 
