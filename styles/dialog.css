@@ -1,0 +1,77 @@
+.load-file-dialog {
+    width: 80%;
+    height: 80%;
+    padding: 0;
+    border-radius: 10px;
+    border: none;
+    /* border: 2px solid #2d2d2d; */
+    box-shadow: 0 5px 10px #2d2d2d50;
+}
+
+.load-file-dialog::backdrop {
+    backdrop-filter: blur(5px);
+}
+
+.dialog-content {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    position: relative;
+}
+
+.left, .right {
+    flex-grow: 1;
+    max-width: 50%;
+    overflow-y: auto;
+    height: 100%;
+    padding: 15px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.right {
+    background-color: #2d2d2d;
+    color: ghostwhite;
+}
+
+.left p {
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #2d2d2d30;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.left p:hover {
+    background-color: palegreen;
+    box-shadow: 0 0 10px palegreen;
+}
+
+.dialog-content button {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    /* left: 50%;
+    transform: translateX(-50%); */
+
+    background-color: palegreen;
+    box-shadow: 0 0 10px palegreen;
+    font-size: 16px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dialog-content button:focus-visible, .dialog-content button:focus-within {
+    outline: transparent;
+}
+
+.activeBtn {
+    background-color: palegreen;
+    box-shadow: 0 0 10px palegreen;
+}
