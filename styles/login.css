@@ -19,9 +19,8 @@
     justify-content: center;
     height: max-content;
     width: 500px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px #2d2d2d30;
     border-radius: 8px;
-    border: 2px solid black;
     padding: 40px 0 40px 0;
     gap: 20px;
 }
@@ -41,7 +40,7 @@
     padding: 10px;
     font-family: 'Roboto Mono', monospace;
     font-size: 16px;
-    background-color: rgb(213, 213, 213);
+    background-color: #2d2d2d20;
     border: none;
     border-radius: 5px;
 }
