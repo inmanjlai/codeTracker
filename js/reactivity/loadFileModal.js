@@ -61,6 +61,14 @@ button.addEventListener('click', async() => {
 
         loadFileBtn.addEventListener('click', loadCode)
         
+        const cancelBtn = document.querySelector('.cancelBtn')
+
+        const closeModal = () => {
+            modal.close()
+        }
+
+        cancelBtn.addEventListener('click', closeModal)
+        
         // show modal
     } else {
         fileList.innerText = 'No Save Files Exist'
