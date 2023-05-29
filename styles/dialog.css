@@ -65,6 +65,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: #2d2d2d;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -77,6 +78,7 @@
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
+    color: #2d2d2d;
 }
 
 .dialog-content button:focus-visible, .dialog-content button:focus-within {
@@ -86,4 +88,36 @@
 .activeBtn {
     background-color: palegreen;
     box-shadow: 0 0 10px palegreen;
+}
+
+@media screen and (max-width: 650px) {
+
+    .load-file-dialog {
+        height: 60%;
+    }
+
+    .dialog-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left {
+        max-width: none;
+    }
+
+    .right {
+        display: none;
+    }
+
+    .dialog-buttons-abs {
+        padding: 15px;
+        position: static;
+        width: 100%;
+        display: flex;
+        gap: 10px;
+    }
+
+    .dialog-buttons-abs button {
+        flex-grow: 1;
+    }
 }
