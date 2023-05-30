@@ -48,3 +48,9 @@ nav > ul li {
 .logout-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
+
+@media screen and (max-width: 650px) {
+  nav {
+    padding-bottom: 0 !important;
+  }
+}

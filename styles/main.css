@@ -60,6 +60,7 @@ form {
   border-radius: 5px;
   font-size: 16px;
   height: 44px;
+  overflow: auto;
 }
 
 .repl-controls button {
@@ -160,6 +161,10 @@ textarea:focus-visible {
     grid-template-areas: 'input' 'output';
   }
 
+  #filename {
+    font-size: 16px;
+  }
+
   .form-container {
     width: 100%;
     grid-area: 'input';
@@ -188,5 +193,24 @@ textarea:focus-visible {
     max-height: 439px;
     border: none;
     grid-area: 'output';
+  }
+
+  .repl-controls {
+    flex-direction: column;
+  }
+
+  .repl-controls .button-controls {
+    width: 100%;
+  }
+  .repl-controls p {
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .repl-controls button {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

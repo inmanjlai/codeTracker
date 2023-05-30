@@ -110,7 +110,7 @@ function runit() {
 async function save()
 {
     //formData = new FormData();
-    var file = document.getElementById('filename').innerHTML;
+    var file = document.getElementById('filename').innerText;
     var code = editor.getValue();
     var userid = pb.authStore.model.id;
     //console.log(userid);

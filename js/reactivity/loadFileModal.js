@@ -3,12 +3,13 @@ const button = document.querySelector('.open-dialog-btn')
 const fileList = document.querySelector('.left')
 const preview = document.querySelector('.right')
 const textEditor = document.querySelector('.codemirror')
+const fileName = document.querySelector('#filename')
 
 button.addEventListener('click', async() => {
     
     // get files
     const files = await pb.collection('codedocs').getFullList({filter: `userid="${pb.authStore.model.id}"`});
-    let currentCode;
+    let currentFile;
 
     if (files.length > 0) {
 
@@ -29,7 +30,7 @@ button.addEventListener('click', async() => {
                 preview.innerText = file.code
                 // if theres a button with a class of active, remove it
                 let activeBtn = document.querySelector('.activeBtn')
-                currentCode = file.code
+                currentFile = file
                 if (activeBtn !== null) {
                     activeBtn.classList.remove('activeBtn')
                 }
@@ -39,7 +40,7 @@ button.addEventListener('click', async() => {
         }
         // set the first file to active when modal is opened
         fileList.firstChild.classList.add('activeBtn')
-        currentCode = files[0].code
+        currentFile = files[0]
     
         // preview the first file by default
         while (preview.firstChild) {
@@ -54,20 +55,13 @@ button.addEventListener('click', async() => {
         const loadFileBtn = document.querySelector('.loadBtn')
 
         const loadCode = () => {
-            editor.setValue(currentCode)
+            editor.setValue(currentFile.code)
+            filename.innerText = currentFile.filename
             loadFileBtn.removeEventListener('click', loadCode)
             modal.close()
         }
 
         loadFileBtn.addEventListener('click', loadCode)
-        
-        const cancelBtn = document.querySelector('.cancelBtn')
-
-        const closeModal = () => {
-            modal.close()
-        }
-
-        cancelBtn.addEventListener('click', closeModal)
         
         // show modal
     } else {
@@ -76,3 +70,11 @@ button.addEventListener('click', async() => {
     
     modal.showModal()
 })
+
+const cancelBtn = document.querySelector('.cancelBtn')
+
+const closeModal = () => {
+    modal.close()
+}
+
+cancelBtn.addEventListener('click', closeModal)
