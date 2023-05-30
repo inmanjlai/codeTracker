@@ -117,6 +117,26 @@ form textarea, #output {
   background-color: #2d2d2d;
   color: ghostwhite;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+#system-output {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+#output textarea {
+  background-color: #2d2d2d;
+  border: none;
+  height: 100%;
+  color: yellow;
+}
+
+#output textarea:focus-visible {
+  outline: transparent;
 }
 
 textarea:focus-visible {
