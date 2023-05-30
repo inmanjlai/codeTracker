@@ -133,6 +133,7 @@ form textarea, #output {
   border: none;
   height: 100%;
   color: yellow;
+  font-size: 16px;
 }
 
 #output textarea:focus-visible {
