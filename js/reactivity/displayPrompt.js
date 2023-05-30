@@ -1,5 +1,5 @@
 window.addEventListener = ('onload', () => {
-    const prompt = document.querySelector('#output');
+    const prompt = document.querySelector('#system-output');
     const user = localStorage.getItem('pocketbase_auth');
     let username = "";
 

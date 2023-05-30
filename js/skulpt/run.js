@@ -57,13 +57,36 @@ editor.on("change",function(a,e){
 
 
 function outf(text) {
-    var mypre = document.getElementById("output");
+    var mypre = document.getElementById("system-output");
     mypre.innerHTML = mypre.innerHTML + text;
 }
 function builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
         throw "File not found: '" + x + "'";
     return Sk.builtinFiles["files"][x];
+}
+
+function sInput(prompt){
+    let output = document.querySelector('#system-output');
+    output.innerText += `${prompt} `;
+
+    return new Promise((resolve, reject) => {
+        let input = document.querySelector('#programInputField')
+        input.value = ""
+        
+        const handleInput = (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault()
+                var inputLines = document.querySelector("#programInputField").value
+                output.innerText += `${input.value}\n`
+                resolve(inputLines);
+                input.removeEventListener('keydown', handleInput)
+                input.value = ""
+                }
+        }
+        input.addEventListener('keydown', handleInput)
+
+    });
 }
 
 // Here's everything you need to run a python program in skulpt
@@ -73,7 +96,8 @@ function builtinRead(x) {
 // call Sk.importMainWithBody()
 function runit() {
     var prog = editor.getValue();
-    var mypre = document.getElementById("output");
+    var mypre = document.getElementById("system-output");
+    console.log(mypre, "HERE")
     mypre.innerHTML = '';
 
     
@@ -81,11 +105,12 @@ function runit() {
         // log all the  events in the database
         // clear out the events.
     }
-    Sk.pre = "output";
+    Sk.pre = "system-output";
     if (prog.includes("turtle"))
     {  
-        Sk.configure({output:outf, read:builtinRead}); 
-        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'output';
+        // Sk.configure({output:outf, read:builtinRead}); 
+        Sk.configure({output:outf, read:builtinRead, inputfun:sInput, inputfunTakesPrompt: true});
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'system-output';
         var myPromise = Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
         });
@@ -93,7 +118,8 @@ function runit() {
 
     else
     {
-        Sk.configure({ output: outf, read: builtinRead });
+        // Sk.configure({ output: outf, read: builtinRead });
+        Sk.configure({output:outf, read:builtinRead, inputfun:sInput, inputfunTakesPrompt: true});
         var myPromise = Sk.misceval.asyncToPromise(function () {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
         });
