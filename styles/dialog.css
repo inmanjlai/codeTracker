@@ -43,12 +43,11 @@
     border-radius: 5px;
     box-shadow: 0 0 10px #2d2d2d30;
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.left p:hover {
-    background-color: palegreen;
-    box-shadow: 0 0 10px palegreen;
+.left p:not([class="activeBtn"]):hover {
+    background-color: #2d2d2d20;
 }
 
 .dialog-buttons-abs {
@@ -58,8 +57,7 @@
 }
 
 .loadBtn {
-    background-color: palegreen;
-    box-shadow: 0 0 5px palegreen;
+    background-color: rgb(129, 189, 234);
     font-size: 16px;
     padding: 15px 30px;
     border: none;
@@ -67,18 +65,23 @@
     cursor: pointer;
     color: #2d2d2d;
     font-family: 'Poppins', sans-serif;
+    transition: filter 0.3s;
 }
 
 .cancelBtn {
-    background-color: palevioletred;
-    box-shadow: 0 0 5px palevioletred;
+    background-color: rgb(218, 124, 124);
     font-size: 16px;
     padding: 15px 30px;
     border: none;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
+    transition: filter 0.3s;
     color: #2d2d2d;
+}
+
+.loadBtn:hover, .cancelBtn:hover {
+    filter: brightness(0.8);
 }
 
 .dialog-content button:focus-visible, .dialog-content button:focus-within {
@@ -86,8 +89,8 @@
 }
 
 .activeBtn {
-    background-color: palegreen;
-    box-shadow: 0 0 10px palegreen;
+    background-color: #2d2d2d;
+    color: ghostwhite;
 }
 
 @media screen and (max-width: 650px) {
