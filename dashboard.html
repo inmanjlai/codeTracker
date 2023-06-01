@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+	<link href="styles/nav.css" rel="stylesheet">
+	<link href="styles/login.css" rel="stylesheet">
+    <link href="./styles/dashboard.css" rel="stylesheet">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <script src="./js/reactivity/isLoggedIn.js" defer></script>
+</head>
+<body>
+    <nav>
+		<div class="logo">
+            <a href="index.html">
+			<span class="material-symbols-outlined">
+				terminal
+			</span>
+			<h1>CodeTracker</h1></a>
+		</div>
+		<ul class="user-auth-controls">
+
+		</ul>
+        <div class="modal-overlay">
+            <div class="modal-content">
+            </div>
+        </div>
+	</nav>
+
+    <main>
+        <div class="assigned-problems">
+            <h2>Assigned Problems</h2>
+            <ul class="assigned-problem-list">
+
+            </ul>
+        </div>
+
+        <div class="submitted-problems">
+            <h2>Submitted Problems</h2>
+        </div>
+    </main>
+
+    <script src="./config.js"></script>
+    <script src="js/pocketbase/pocketbase.umd.js"></script>
+    <script src="./js/pocketbase/auth.js"></script>
+    <script src="./js/reactivity/fetchProblems.js"></script>
+</body>
+</html>

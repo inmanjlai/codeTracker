@@ -19,7 +19,9 @@ html {
 }
 
 main {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
   align-items: center;
   width: 100%;
   flex-grow: 1;
@@ -134,6 +136,7 @@ form textarea, #output {
   height: 100%;
   color: yellow;
   font-size: 16px;
+  resize: none;
 }
 
 #output textarea:focus-visible {

@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener('load', () => {
     const modalOverlay = document.querySelector('.modal-overlay');
     const modalContent = document.querySelector('.modal-content');
 
@@ -20,8 +20,9 @@ window.onload = () => {
         modalOverlay.style.display = 'none';
         userAuthControls = document.querySelector('.user-auth-controls');
         userAuthControls.innerHTML = `
+            <a href="./dashboard.html">Dashboard</a>
             <button class="logout-button" onclick="logout()">Logout</button>
         `
     }
 
-}
+})

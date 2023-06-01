@@ -19,7 +19,7 @@ nav > ul li {
   list-style: none;
 }
 
-.logo {
+.logo a{
   display: flex;
   align-items: center;
   gap: 5px;
@@ -52,5 +52,21 @@ nav > ul li {
 @media screen and (max-width: 650px) {
   nav {
     padding-bottom: 0 !important;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo span {
+    display: flex;
+    align-items: center;
+    font-size: 49px;
+  }
+
+  .logo h1 {
+    display: none;
   }
 }
