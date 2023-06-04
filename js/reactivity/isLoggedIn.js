@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
     const modalContent = document.querySelector('.modal-content');
 
     if (localStorage.getItem('pocketbase_auth') == null) {
+        modalOverlay.style.display = 'grid';
         modalContent.innerHTML = `
             <p id='error-field' style='display:none'>Your username/email and password combination was incorrect</p>
             <label for="username">
@@ -17,7 +18,6 @@ window.addEventListener('load', () => {
             <a href="register.html">Don't have an account? Sign up</a>
         `
     } else {
-        modalOverlay.style.display = 'none';
         userAuthControls = document.querySelector('.user-auth-controls');
         userAuthControls.innerHTML = `
             <a href="./dashboard.html">Dashboard</a>

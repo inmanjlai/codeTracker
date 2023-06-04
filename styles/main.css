@@ -78,10 +78,6 @@ form {
   transition: background-color 0.3s;
 }
 
-.repl-controls button:last-child {
-  padding-right: 5px;
-}
-
 .button-controls {
   display: flex;
   align-items: center;
