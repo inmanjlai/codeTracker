@@ -12,10 +12,10 @@ const getProblem = async() => {
     
     try {
         const problemCode = await pb.collection('codedocs').getFirstListItem(`userid="${userId}" && problem="${problem.id}"`)
-        editor.setValue(problemCode.code)
+        editor.setValue(`${problemCode.code}`)
 
     } catch (err) {
-        editor.setValue('print("Work on your assigned problem here")')
+        editor.setValue(`${problemCode.code}`)
     }
 
 }
@@ -30,12 +30,16 @@ const saveProblem = async() => {
     try {
         const doesExist = await pb.collection('codedocs').getFirstListItem(`userid="${userId}" && filename="${filenameWithName}"`)
         await pb.collection('codedocs').update(doesExist.id, {code: code})
+        snackbarNotification(`${filename.innerText} saved successfully.`)
     } catch (err) {
         await pb.collection('codedocs').create({userid: userId, filename: filenameWithName, code: code, problem: problemId})
+        snackbarNotification(`${filename.innerText} saved successfully.`)
     }
 }
 
 const submitProblem = async() => {
     const problem = await pb.collection('coding_problems').getOne(problemId)
     await pb.collection('coding_problems').update(problemId, { submitted_by: [...problem.submitted_by, userId], assigned_to: problem.assigned_to.filter((id) => id !== userId)})
+    
+    snackbarNotification(`${filename.innerText} submitted successfully.`)
 }
