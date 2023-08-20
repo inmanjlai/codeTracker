@@ -148,7 +148,36 @@ async function save()
         "userid": userid
     };
     console.log(data);
-    const record = await pb.collection('codedocs').create(data);
+
+    try {
+        const doesRecordWithNameExist = await pb.collection('codedocs')
+            .getFirstListItem(`filename="${file}" && userid="${userid}"`)
+            const confirmSaveDialog = document.querySelector('.overwrite-save-dialog')
+            const cancelSaveBtn = document.querySelector('.cancelSaveBtn')
+            const confirmSave = document.querySelector('.confirmSaveBtn')
+        
+            cancelSaveBtn.addEventListener('click', (e) => {
+                confirmSaveDialog.close()
+            })
+        
+            confirmSave.addEventListener('click', async(e) => {
+                // make this update instead of create
+                const record = await pb.collection('codedocs').update(doesRecordWithNameExist.id, data);
+                confirmSaveDialog.close()
+                snackbarNotification(`${data.filename} saved successfully.`)
+            })
+        
+            if (doesRecordWithNameExist) {
+                confirmSaveDialog.showModal()
+            }
+    } catch(err) {
+        console.log('Saving new file')
+        const record = await pb.collection('codedocs').create(data);
+        snackbarNotification(`${data.filename} saved successfully.`)
+    }
+
+   
+
     
     
 }

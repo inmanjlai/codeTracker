@@ -45,17 +45,19 @@
 
 			</ul>
 
+			
 			<div class="modal-overlay">
 				<div class="modal-content">
 				</div>
 			</div>
 		</nav>
-
+		
 		<main>
+			
 			<div class="form-container">
 				<div class="repl-controls">
 					<p id="filename">app.py</p>
-
+					
 					<div class="button-controls">
 						<button type="button" style="float: left;" onclick="saveProblem()">Save
 							<span class="material-symbols-outlined">
@@ -106,10 +108,26 @@
 			</div>
 		</dialog>
 
+		<dialog class="overwrite-save-dialog">
+			<div class="overwrite-dialog-content">
+				<span class="material-symbols-rounded warning-icon">
+					warning
+					</span>
+				<p>A file with this name <strong>already exists</strong>, would you like to <strong>overwrite</strong> the save?</p>
+				<button class="cancelSaveBtn">Cancel</button>
+				<button class="confirmSaveBtn">Confirm Save</button>
+			</div>
+		</dialog>
+
+		<div class="snackbar">
+			Message Here
+		</div>
+
 		<script src="js/pocketbase/pocketbase.umd.js"></script>
 		<script src="./config.js"></script>
 		<script src="./js/pocketbase/auth.js"></script>
 		<script src="./js/reactivity/loadProblem.js"></script>
+		<script src="./js/reactivity/snackbar.js"></script>
 	</body>
 
 </html>
