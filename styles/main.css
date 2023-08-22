@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  background-color: paleturquoise;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -16,6 +20,7 @@ html {
   display: flex;
   flex-direction: column;
   font-family: 'Roboto Mono', monospace;
+  background-color: ghostwhite;
 }
 
 main {
@@ -239,7 +244,7 @@ textarea:focus-visible {
 .snackbar {
   pointer-events: none;
   opacity: 0;
-  background-color: palegreen;
+  background-color: rgb(172, 222, 172);
   color: #2d2d2d;
   font-family: Poppins;
   padding: 20px;

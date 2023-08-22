@@ -161,3 +161,40 @@
     font-size: 64px !important;
     text-align: center;
 }
+
+/* CONFIRM SUBMIT DIALOG */
+.confirm-submit-dialog {
+    width: 80%;
+    max-width: 450px;
+    border: none;
+    border-radius: 10px;
+    font-family: Poppins;
+}
+
+.confirm-submit-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.confirm-submit-dialog button {
+    background-color: #2d2d2d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.confirm-submit-dialog .cancelSubmitBtn  {
+    background-color: #2d2d2d30;
+    /* border: 1px solid #2d2d2d; */
+    color: #2d2d2d;
+}
+
+.warning-icon {
+    color: orange;
+    font-size: 64px !important;
+    text-align: center;
+}

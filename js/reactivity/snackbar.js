@@ -6,5 +6,5 @@ const snackbarNotification = (message) => {
 
     setTimeout(() => {
         snackbar.style.opacity = 0
-    }, 5000)
+    }, 3000)
 }

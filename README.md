@@ -250,7 +250,7 @@ window.addEventListener = ('onload', () => {
         const userJson =  JSON.parse(user)
         username = userJson.model.username;
 
-        prompt.innerText = `${username}@codeTracker ~` // if the user's username is imanjlai this will read as 'imanjlai@codeTracker ~'
+        prompt.innerText = `${username}@computing_hub ~` // if the user's username is imanjlai this will read as 'imanjlai@codeTracker ~'
     }
 })
 ```

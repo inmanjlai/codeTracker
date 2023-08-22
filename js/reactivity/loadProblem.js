@@ -38,8 +38,24 @@ const saveProblem = async() => {
 }
 
 const submitProblem = async() => {
-    const problem = await pb.collection('coding_problems').getOne(problemId)
-    await pb.collection('coding_problems').update(problemId, { submitted_by: [...problem.submitted_by, userId], assigned_to: problem.assigned_to.filter((id) => id !== userId)})
-    
-    snackbarNotification(`${filename.innerText} submitted successfully.`)
+    const confirmationModal = document.querySelector('.confirm-submit-dialog')
+    confirmationModal.showModal()
+
+    const confirmBtn = document.querySelector('.confirmSubmitBtn')
+    const cancelBtn = document.querySelector('.cancelSubmitBtn')
+
+    confirmBtn.addEventListener('click', async(e) => {
+        const problem = await pb.collection('coding_problems').getOne(problemId)
+        await pb.collection('coding_problems').update(problemId, { submitted_by: [...problem.submitted_by, userId], assigned_to: problem.assigned_to.filter((id) => id !== userId)})
+        
+        confirmationModal.close()
+        snackbarNotification(`${filename.innerText} submitted successfully. You will be redirected to the dashboard.`)
+        setTimeout(() =>{
+            window.location.href = `${BASE_URL}/dashboard.html`
+        }, 3300)
+    })
+
+    cancelBtn.addEventListener('click', () => {
+        confirmationModal.close()
+    })
 }
