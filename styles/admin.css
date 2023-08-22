@@ -14,40 +14,31 @@ section > div {
 
 *::selection {
     background-color: paleturquoise;
-  }
+}
 
-  .snackbar {
-    pointer-events: none;
-    opacity: 0;
-    background-color: rgb(172, 222, 172);
-    color: #2d2d2d;
-    font-family: Poppins;
-    padding: 20px;
-    position: absolute;
-    top: 80px;
-    right: 20px;
-    border-radius: 5px;
-    transition: opacity 0.3s;
-    z-index: 999;
-  }
-
-section > div > h2 {
-    padding: 20px 20px 0 20px;
+.snackbar {
+pointer-events: none;
+opacity: 0;
+background-color: rgb(172, 222, 172);
+color: #2d2d2d;
+font-family: Poppins;
+padding: 20px;
+position: absolute;
+top: 80px;
+right: 20px;
+border-radius: 5px;
+transition: opacity 0.3s;
+z-index: 999;
 }
 
 .admin-dashboard {
     display: grid;
-    grid-template-rows: 70% 30%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
-    'questions assignments'
-    'submissions submissions';
     /* gap: 20px; */
     width: 100%;
     overflow: hidden;
 }
 
-.question-list-container, .assignment-list-container {
+.question-list-container {
     margin-top: 20px;
     width: 100%;
     background-color: white;
@@ -55,52 +46,40 @@ section > div > h2 {
 }
 
 .question-list-container {
-    grid-area: questions;
     overflow-y: auto;
 }
 
-.assignment-list-container {
-    grid-area: assignments;
-    overflow-y: auto;
-    
-}
-
-.submission-list-container {
-    grid-area: submissions;
-    overflow-y: auto;
-}
-
-.question-list-container > h3 {
+.question-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding-top: 20px;
     padding-left: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 20px;
     position: sticky;
     top: 0;
     background-color: white;
     z-index: 999;
-    
-}
-
-.assignment-list-container > h3 {
-    padding-bottom: 25px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding-left: 20px;
-    padding-top: 20px;
-}
-
-.question-list-container > h3 {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    /* padding-bottom: 20px; */
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     padding-left: 20px;
     padding-top: 20px;
+    gap: 20px;
 }
 
-.question-list-container > h3 > span {
+.question-header input {
+    background-color: #28282820;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    flex-grow: 1;
+    max-width: 60%;
+    font-size: 16px;
+    font-family: Poppins;
+}
+
+.question-list-container > div > span {
     margin-right: 20px;
     padding: 5px;
     cursor: pointer;
@@ -108,7 +87,7 @@ section > div > h2 {
     border-radius: 50%;
 }
 
-.question-list-container > h3 > span:hover {
+.question-list-container > div > span:hover {
     background-color: #28282820;
 }
 
@@ -120,15 +99,44 @@ section > div > h2 {
     padding: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
 }
 
-.question:last-child {
-    border: none;
+.question span {
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
 }
 
-.question p {
-    max-width: 50ch;
-    word-wrap: break-word;
+.question span:hover {
+    cursor: pointer;
+    background-color: #28282820;
+}
+
+.question-info {
+    flex-grow: 1;
+}
+
+.question .questionPoints {
+    background-color: #28282820;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 10px;
+    width: 60px;
+    font-weight: 800;
+    color: #282828;
+    font-size: 24px;
+    min-width: 60px;
 }
 
 .admin-dialog {
@@ -182,28 +190,168 @@ section > div > h2 {
     position: relative;
 }
 
-.question span {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    transition: background-color 0.3s;
-    padding: 5px;
-}
-
-.question span:hover {
-    cursor: pointer;
-    background-color: #28282820;
-}
-
-.submission-list-container h3 {
-    padding: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .create-question-dialog {
     background-color: transparent;
     border: none;
 }
+
+.admin-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 0px 20px;
+}
+
+.admin-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-nav ul li {
+    color: #28282880;
+}
+
+.admin-nav ul li.active {
+    color: #282828;
+}
+
+.admin-link {
+    cursor: pointer;
+}
+
+/* BY DEFAULT BOTH ASSIGNMENT LISTS AND STUDENT LISTS WILL BE DISPLAY NONE */
+.assignment-list-container {
+    display: none;
+    margin-top: 20px;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.student-list-container {
+    display: none;
+}
+
+.assignment-list-container > div > span {
+    margin-right: 20px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 50%;
+}
+
+.assignment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 20px;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+
+.assignment-list-container > div > span:hover {
+    background-color: #28282820;
+}
+
+.assignment {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #28282820;
+}
+
+.assignment-info {
+
+}
+
+.assignment span {
+        border-radius: 50%;
+        transition: background-color 0.3s;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        height: fit-content;
+        justify-content: center;
+}
+
+.assignment span:hover {
+    cursor: pointer;
+    background-color: #28282820;
+}
+
+
+.student-list-container > div > span {
+    margin-right: 20px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 50%;
+}
+
+.student-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 999;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 20px;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+
+.student-list-container > div > span:hover {
+    background-color: #28282820;
+}
+
+.student {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #28282820;
+}
+
+.student-info {
+
+}
+
+.student span {
+        border-radius: 50%;
+        transition: background-color 0.3s;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        height: fit-content;
+        justify-content: center;
+}
+
+.student span:hover {
+    cursor: pointer;
+    background-color: #28282820;
+}
+
