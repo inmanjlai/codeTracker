@@ -36,7 +36,7 @@ if (user !== null) {
                             <div class='assignment-header'>
                                 <h3>Assignments</h3>
                                 <!--<input type='search' placeholder='Search for an assignment'></input>-->
-                                <span class="material-symbols-rounded add-assignment">Add</span>
+                                <span class="material-symbols-rounded createAssignmentBtn">Add</span>
                             </div>
                             <div class="assignment-list">
                             </div>
@@ -111,6 +111,19 @@ if (user !== null) {
                     </div>
                 `
             })
+
+            // studentList.innerHTML = '';
+            // allStudents.forEach(ele =>{
+            //     studentList.innerHTML += `
+            //         <div class="student">
+            //             <div class='student-info'>
+            //                 <p>${ele.username}</p>
+            //                 <input type='hidden' value='${ele.id}' class='questionId'></input>
+            //             </div>
+            //             <span class="material-symbols-rounded">Settings</span>
+            //         </div>
+            //     `
+            // })
             
             // EDIT AND CREATE QUESTION DIALOGS
 
@@ -203,6 +216,38 @@ if (user !== null) {
                     window.location.href = `${BASE_URL}/dashboard.html`
                 }, 3000)
             })
+
+            // EDIT AND CREATE ASSIGNMENTS
+            const createAssignmentDialog = document.querySelector('.create-assignment-dialog');
+            const createAssignmentButton = document.querySelector('.createAssignmentBtn')
+            createAssignmentButton.addEventListener('click', () => {
+                createAssignmentDialog.showModal();
+                createAssignmentDialog.innerHTML = `
+                    <div class="create-assignment-content">
+                        <label>Name</label>
+                        <input type='text' placeholder='Name'></input>
+                        <label>Questions</label>
+                        <div class="questions-for-assignment">
+                        </div>
+                        <button>Cancel</button>
+                        <button>Create Assignment</button>
+                    </div>
+                `
+                const questionsForAssignment = document.querySelector('.questions-for-assignment')
+                codingProblems.forEach((problem) => {
+                    questionsForAssignment.innerHTML += `
+                        <label class='question-to-select'>
+                            <input type='checkbox'></input>
+                            ${problem.title}
+                        </label>
+                    `
+                })
+            })
+
+
+            const editAssignmentDialog = document.querySelector('.edit-assignment-dialog');
+            const editAssignmentButton = document.querySelector('.editAssignmentBtn')
+
 
             // ADMIN DASHBOARD NAVIGATION
 

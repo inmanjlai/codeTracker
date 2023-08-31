@@ -336,10 +336,6 @@ z-index: 999;
     border-bottom: 1px solid #28282820;
 }
 
-.student-info {
-
-}
-
 .student span {
         border-radius: 50%;
         transition: background-color 0.3s;
@@ -355,3 +351,60 @@ z-index: 999;
     background-color: #28282820;
 }
 
+/* ASSIGNMENT CREATION DIALOG */
+.create-assignment-dialog {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 50%;
+    max-width: 800px;
+}
+
+.create-assignment-content {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.create-assignment-content input {
+    padding: 10px;
+    font-family: Poppins;
+    border: none;
+    font-size: 16px;
+    background-color: #28282820;
+    border-radius: 5px;
+    font-family: Poppins;
+    resize: vertical;
+}
+
+.create-assignment-content label {
+    font-family: Poppins;
+}
+
+.questions-for-assignment {
+    display: flex;
+    flex-direction: column;
+    background-color: #28282820;
+    padding: 10px;
+    max-height: 20%;
+    flex-wrap: wrap;
+    border-radius: 5px;
+}
+
+.questions-for-assignment label {
+    cursor: pointer;
+}
+
+.create-assignment-content button {
+    background-color: #282828;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-family: Poppins;
+    cursor: pointer;
+}
