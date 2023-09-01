@@ -408,3 +408,8 @@ z-index: 999;
     font-family: Poppins;
     cursor: pointer;
 }
+
+.assignment-controls {
+    display: flex;
+    gap: 0.5rem;
+}

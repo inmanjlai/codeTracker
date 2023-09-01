@@ -36,7 +36,7 @@ if (user !== null) {
                             <div class='assignment-header'>
                                 <h3>Assignments</h3>
                                 <!--<input type='search' placeholder='Search for an assignment'></input>-->
-                                <span class="material-symbols-rounded createAssignmentBtn">Add</span>
+                                <span class="material-symbols-rounded add-assignment">Add</span>
                             </div>
                             <div class="assignment-list">
                             </div>
@@ -83,13 +83,19 @@ if (user !== null) {
                             <p>${ele.title}</p>
                             <input type='hidden' value='${ele.id}'></input>
                         </div>
-                        <span class="material-symbols-rounded">Settings</span>
+                        <div class='assignment-controls'>
+                            <span class="material-symbols-rounded add-student" title="assign students">group</span>
+                            <span class="material-symbols-rounded" title="assignment settings">Settings</span>
+                        </div>
                     </div>
                 `
             })
 
             // LOADING ALL STUDENTS
             const classes = await pb.collection('classes').getFullList({expand: 'students'});
+
+            console.log('classes', classes)
+
             const studentList = document.querySelector('.student-list')
 
             const allStudents = []
@@ -98,6 +104,8 @@ if (user !== null) {
                     allStudents.push(student)
                 })
             })
+
+            console.log(allStudents)
 
             studentList.innerHTML = '';
             allStudents.forEach(ele =>{
@@ -219,34 +227,78 @@ if (user !== null) {
 
             // EDIT AND CREATE ASSIGNMENTS
             const createAssignmentDialog = document.querySelector('.create-assignment-dialog');
-            const createAssignmentButton = document.querySelector('.createAssignmentBtn')
-            createAssignmentButton.addEventListener('click', () => {
-                createAssignmentDialog.showModal();
-                createAssignmentDialog.innerHTML = `
-                    <div class="create-assignment-content">
-                        <label>Name</label>
-                        <input type='text' placeholder='Name'></input>
-                        <label>Questions</label>
-                        <div class="questions-for-assignment">
-                        </div>
-                        <button>Cancel</button>
-                        <button>Create Assignment</button>
+            createAssignmentDialog.innerHTML = `
+                <div class="create-assignment-content">
+                    <label>Name</label>
+                    <input type='text' placeholder='Name' class='create-assignment-title'></input>
+                    <label>Questions</label>
+                    <div class="questions-for-assignment">
                     </div>
-                `
-                const questionsForAssignment = document.querySelector('.questions-for-assignment')
-                codingProblems.forEach((problem) => {
-                    questionsForAssignment.innerHTML += `
-                        <label class='question-to-select'>
-                            <input type='checkbox'></input>
-                            ${problem.title}
-                        </label>
+                    <button class='closeAssignmentModal'>Cancel</button>
+                    <button class="createAssignmentBtn">Create Assignment</button>
+                    </div>
                     `
-                })
+            const addAssignment = document.querySelector('.add-assignment')
+            const questionsForAssignment = document.querySelector('.questions-for-assignment')
+
+            codingProblems.forEach((problem) => {
+                questionsForAssignment.innerHTML += `
+                    <label class='question-to-select'>
+                        <input type='checkbox'></input>
+                        <input type='hidden' value="${problem.id}" class=''></input>
+                        ${problem.title}
+                    </label>
+                `
+            })
+            
+            addAssignment.addEventListener('click', () => {
+                createAssignmentDialog.showModal();
             })
 
+            const createAssignmentButton = document.querySelector('.createAssignmentBtn')
+
+            createAssignmentButton.addEventListener('click', async(e) => {
+                const selectedProblems = [];
+                const questionList = document.querySelectorAll('.question-to-select');
+                questionList.forEach(question => {
+                    inputs = question.children;
+
+                    if (inputs[0].checked == true) selectedProblems.push(inputs[1].value)
+
+                })
+
+                const title = document.querySelector('.create-assignment-title').value;
+                data = {title: title, questions: selectedProblems}
+
+                await pb.collection('assignments').create(data)
+                createAssignmentDialog.close()
+                snackbarNotification(`${title} created. Your page will be refreshed to display changes momentarily.`)
+                
+                setTimeout(() => {
+                    window.location.href = `${BASE_URL}/dashboard.html`
+                }, 3000)
+            })
+
+            const closeAssignmentModal = document.querySelector('.closeAssignmentModal')
+
+            closeAssignmentModal.addEventListener('click', (e) => {
+                createAssignmentDialog.close()
+            })
 
             const editAssignmentDialog = document.querySelector('.edit-assignment-dialog');
             const editAssignmentButton = document.querySelector('.editAssignmentBtn')
+
+            editAssignmentDialog.innerHTML = `
+                <div class="create-assignment-content">
+                    <label>Name</label>
+                    <input type='text' placeholder='Name' class='create-assignment-title'></input>
+                    <label>Questions</label>
+                    <div class="questions-for-assignment">
+                    </div>
+                    <button>Cancel</button>
+                    <button class="createAssignmentBtn">Create Assignment</button>
+                    </div>
+            `
 
 
             // ADMIN DASHBOARD NAVIGATION
