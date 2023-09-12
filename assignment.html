@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>Computing Hub</title>
+		<link href="styles/nav.css" rel="stylesheet">
+		<link href="styles/main.css" rel="stylesheet">
+		<link href="styles/login.css" rel="stylesheet">
+		<link href="styles/dialog.css" rel="stylesheet">
+		<link href="styles/assignment.css" rel="stylesheet">
+
+		<!-- GOOGLE FONT/ICON IMPORTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+		<!-- SKULPT IMPORTS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+		<script src="js/skulpt/run.js" defer></script>
+		<script src="js/skulpt/skulpt.min.js" type="text/javascript" defer></script>
+		<script src="js/skulpt/skulpt-stdlib.js" type="text/javascript" defer></script>
+
+		<!-- REACTIVITY -->
+		<script src="js/reactivity/isLoggedIn.js"></script>
+		<script src="js/reactivity/displayPrompt.js"></script>
+
+		<!-- CODE MIRROR -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.css"></link>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/codemirror.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/mode/python/python.min.js"></script>
+	</head>
+
+	<body>
+		<nav>
+			<div class="logo">
+				<a href="index.html">
+				<span class="material-symbols-outlined">
+					terminal
+				</span>
+				<h1>Computing Hub</h1></a>
+			</div>
+			<ul class="user-auth-controls">
+
+			</ul>
+
+			
+			<div class="modal-overlay">
+				<div class="modal-content">
+				</div>
+			</div>
+		</nav>
+		
+		<main>
+			<div class="assignment-page-container">
+				<div class="question-container">
+					<h2>Questions</h2>
+				</div>
+				
+				<div class="code-container">
+					<div class="form-container">
+						<div class="repl-controls">
+							<p id="filename">app.py</p>
+							
+							<div class="button-controls">
+								<button type="button" style="float: left;" onclick="saveCurrentProblem()">Save
+									<span class="material-symbols-outlined">
+										cloud_download
+									</span>
+								</button>
+								<button type="button" onclick="runit()">Run
+									<span class="material-symbols-outlined">
+										chevron_right
+									</span>
+								</button>
+								<button type="button" onclick="submitAssignment()">Submit 
+									<span class="material-symbols-outlined">
+										upload
+									</span>
+								</button>
+							</div>
+	
+						</div>
+	
+						<div id="editor">
+						</div>
+	
+						<!-- <textarea id="yourcode" cols="40" rows="10">print('hello world')</textarea><br /> -->
+					</div>
+					<!-- WHERE THE RUN OUTPUT WILL DISPLAY -->
+					<div class="pre-container">
+						<p id="prompt">Output</p>
+						<pre id="output">
+							<pre id="system-output"></pre>
+							<textarea type="text" id="programInputField"></textarea>
+						</pre>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<dialog class="load-file-dialog">
+			<div class="dialog-content">
+				<div class="left">
+				</div>
+	
+				<div class="right">
+				</div>
+
+				<div class="dialog-buttons-abs">
+					<button class="cancelBtn">Cancel</button>
+					<button class="loadBtn">Load File</button>
+				</div>
+			</div>
+		</dialog>
+
+		<dialog class="overwrite-save-dialog">
+			<div class="overwrite-dialog-content">
+				<span class="material-symbols-rounded warning-icon">
+					warning
+					</span>
+				<p>A file with this name <strong>already exists</strong>, would you like to <strong>overwrite</strong> the save?</p>
+				<button class="cancelSaveBtn">Cancel</button>
+				<button class="confirmSaveBtn">Confirm Save</button>
+			</div>
+		</dialog>
+		
+		<dialog class="confirm-submit-dialog">
+			<div class="confirm-submit-content">
+				<span class="material-symbols-rounded warning-icon">
+					warning
+					</span>
+				<p>Once you submit this file, you will <strong>NOT</strong> be able to make any changes.</p>
+				<button class="cancelSubmitBtn">Cancel</button>
+				<button class="confirmSubmitBtn">Confirm Submission</button>
+			</div>
+		</dialog>
+
+		<div class="snackbar">
+			Message Here
+		</div>
+
+		<script src="js/pocketbase/pocketbase.umd.js"></script>
+		<script src="./config.js"></script>
+		<script src="./js/pocketbase/auth.js"></script>
+		<script src="./js/reactivity/loadProblem.js"></script>
+		<script src="./js/reactivity/snackbar.js"></script>
+		<script src="./js/reactivity/assignment.js"></script>
+	</body>
+
+</html>
