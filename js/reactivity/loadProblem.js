@@ -3,6 +3,10 @@ const filename = document.querySelector('#filename')
 
 const user = localStorage.getItem('pocketbase_auth')
 const userJson = JSON.parse(user)
+
+console.log(userJson)
+
+const username = userJson.model.username
 const userId = userJson.model.id
 
 const getProblem = async() => {
@@ -14,17 +18,18 @@ const getProblem = async() => {
     filenameWithName = userJson.model.username + "_" + currentProblem
 
     async function setInitialCodeValue() {
-
         try {
-            const currentProblemCode = await pb.collection('codedocs').getFirstListItem(`problem="${currentProblem}"`, {expand: "problem"})
-            console.log(currentProblemCode)
+            console.log(username)
+            const currentProblemCode = await pb.collection('codedocs')
+                .getFirstListItem(`filename="${username}_${currentProblem}"`, {expand: "problem"})
+            console.log(currentProblemCode, "HERE")
             // change the editor value to be the codedoc for the associated problem
             let codeValue = `${currentProblemCode.code}`
             editor.setValue(codeValue)
         } catch (err) {
-            const currentProblemCode = await pb.collection('codedocs').getFirstListItem(`problem="${currentProblem}"`, {expand: "problem"})
-            console.log("current problem does not exist yet")
-            let codeValue = `# ${currentProblemCode.expand.problem.description}`
+            const currentProblemCode = await pb.collection('coding_problems').getOne(currentProblem)
+
+            let codeValue = `# ${currentProblemCode.description}`
             editor.setValue(codeValue)
         }
     }
@@ -57,19 +62,18 @@ const getProblem = async() => {
                         localStorage.setItem('currentQuestion', questionId)
                         // fetch code for the current problem
                         async function getCode() {
-
                             try {
-                                const currentProblemCode = await pb.collection('codedocs').getFirstListItem(`problem="${questionId}"`, {expand: "problem"})
-                                console.log(currentProblemCode)
+                                console.log(username)
+                                const currentProblemCode = await pb.collection('codedocs')
+                                    .getFirstListItem(`filename="${username}_${questionId}"`, {expand: "problem"})
+                                console.log(currentProblemCode, "HERE")
                                 // change the editor value to be the codedoc for the associated problem
                                 let codeValue = `${currentProblemCode.code}`
                                 editor.setValue(codeValue)
                             } catch (err) {
-                                const currentProblemCode = await pb.collection('codedocs').getFirstListItem(`problem="${questionId}"`, {expand: "problem"})
-                                console.log(currentProblemCode)
-                                
-                                console.log("current problem does not exist yet")
-                                let codeValue = `# ${currentProblemCode.expand.problem.description}`
+                                const currentProblemCode = await pb.collection('coding_problems').getOne(questionId)
+
+                                let codeValue = `# ${currentProblemCode.description}`
                                 editor.setValue(codeValue)
                             }
                         }
