@@ -319,8 +319,9 @@ z-index: 999;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     padding-left: 20px;
-    padding-top: 20px;
+    padding-top: 25px;
     gap: 20px;
+    
 }
 
 
@@ -412,4 +413,69 @@ z-index: 999;
 .assignment-controls {
     display: flex;
     gap: 0.5rem;
+}
+
+.edit-assignment-dialog {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 50%;
+    max-width: 800px;
+}
+
+.edit-assignment-content {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+}
+
+.create-assignment-content h2 {
+    font-family: Poppins;
+}
+
+.edit-assignment-content input {
+    padding: 10px;
+    font-family: Poppins;
+    border: none;
+    font-size: 16px;
+    background-color: #28282820;
+    border-radius: 5px;
+    font-family: Poppins;
+    resize: vertical;
+}
+
+.edit-assignment-content label {
+    font-family: Poppins;
+}
+
+.edit-questions-for-assignment {
+    display: flex;
+    flex-direction: column;
+    background-color: #28282820;
+    padding: 10px;
+    max-height: 20%;
+    flex-wrap: wrap;
+    border-radius: 5px;
+}
+
+.question-for-assignment label {
+    cursor: pointer;
+}
+
+.question-to-select {
+    cursor: pointer;
+}
+
+.edit-assignment-content button {
+    background-color: #282828;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-family: Poppins;
+    cursor: pointer;
 }
