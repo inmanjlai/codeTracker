@@ -293,10 +293,17 @@
                     <label>Questions</label>
                     <div class="edit-questions-for-assignment">
                     </div>
-                    <button>Cancel</button>
+                    <button class='closeEditAssignmentModal'>Cancel</button>
                     <button class="confirmEditAssignmentBtn">Edit Assignment</button>
                     </div>
                     `
+
+                    const closeEditAssignmentModal = document.querySelector('.closeEditAssignmentModal');
+
+                    closeEditAssignmentModal.addEventListener('click', (e) => {
+                        editAssignmentDialog.close()
+                    })
+
                     const questionsForEdit = document.querySelector('.edit-questions-for-assignment');
                     const allQuestionsToShow = await pb.collection('coding_problems').getFullList();
                     
