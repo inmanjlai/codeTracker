@@ -58,6 +58,8 @@ button.addEventListener('click', async() => {
             editor.setValue(currentFile.code)
             filename.innerText = currentFile.filename
             loadFileBtn.removeEventListener('click', loadCode)
+            // call the function to log this event in the database
+            logload(currentFile.code)
             modal.close()
         }
 
@@ -78,3 +80,24 @@ const closeModal = () => {
 }
 
 cancelBtn.addEventListener('click', closeModal)
+
+// this function should be called whenever we load a new file
+// so we can baseline the key events.
+async function logload(cd)
+{
+    var userid = pb.authStore.model.id;
+    // get timestamp for this event
+    timestamp = Date.now(); 
+    // get the code and time stamp
+    var evt = {"code":cd,"timestamp":timestamp};
+    var evnt = JSON.stringify(evt);
+    // create data with event and user id
+        const data = {
+            "eventtype":evnt,
+            "userid": userid,
+            "whichevent": "load"
+    };
+    // write to database
+    const record = await pb.collection('events').create(data);
+    //console.log(data);
+}
