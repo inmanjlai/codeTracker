@@ -8,7 +8,7 @@ const fileName = document.querySelector('#filename')
 button.addEventListener('click', async() => {
     
     // get files
-    const files = await pb.collection('codedocs').getFullList({filter: `userid="${pb.authStore.model.id}"`});
+    const files = await pb.collection('codedocs').getFullList({filter: `userid="${pb.authStore.model.id}" && problem=null`});
     let currentFile;
 
     if (files.length > 0) {
