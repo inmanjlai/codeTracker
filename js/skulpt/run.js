@@ -19,17 +19,43 @@ function buildEditor() {
 
 const editor = buildEditor()
 const events = [];
+generateEvent("start",true);
+
+async function generateEvent(type, code)
+{
+    // log all the  events in the database
+    // clear out the events.
+    logevent();
+    
+    var userid = pb.authStore.model.id;
+    var prog = editor.getValue();
+
+    timestamp = Date.now();
+
+    var evt = {"code":prog,"timestamp":timestamp};
+    var evnt = JSON.stringify(evt);
+    // create data with event and user id
+        const data = {
+            "eventtype":evnt,
+            "userid": userid,
+            "whichevent": type
+    };
+    // write to database
+    const record =  await pb.collection('events').create(data);
+
+}
 async function logevent()
 {
     var userid = pb.authStore.model.id;
     // process all events and clear our the array
     while(events.length > 0) {
         // get each event
-        evt = events.pop();
+        evt = events.shift();
         // create data with event and user id
         const data = {
             "eventtype":evt,
-            "userid": userid
+            "userid": userid,
+            "whichevent": "key"
         };
         // write to database
         const record = await pb.collection('events').create(data);
@@ -44,7 +70,7 @@ editor.on("change",function(a,e){
     var evnt = JSON.stringify(e);
     
     events.push(evnt);
-    console.log(events.length);
+    //console.log(events.length);
     if(events.length > 10)
     {
         // log these events in the database
@@ -97,14 +123,10 @@ function sInput(prompt){
 function runit() {
     var prog = editor.getValue();
     var mypre = document.getElementById("system-output");
-    console.log(mypre, "HERE")
+    //console.log(mypre, "HERE")
     mypre.innerHTML = '';
 
     
-    {
-        // log all the  events in the database
-        // clear out the events.
-    }
     Sk.pre = "system-output";
     if (prog.includes("turtle"))
     {  
@@ -131,6 +153,8 @@ function runit() {
                 mypre.innerHTML = err.toString()
             });
     }
+    
+    generateEvent("execute",true)
 }
 
 async function save()
@@ -174,11 +198,6 @@ async function save()
         console.log('Saving new file')
         const record = await pb.collection('codedocs').create(data);
         snackbarNotification(`${data.filename} saved successfully.`)
-    }
-
-   
-
-    
-    
+    }   
 }
 
