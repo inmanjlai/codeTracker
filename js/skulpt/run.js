@@ -132,7 +132,8 @@ function runit() {
     {  
         // Sk.configure({output:outf, read:builtinRead}); 
         Sk.configure({output:outf, read:builtinRead, inputfun:sInput, inputfunTakesPrompt: true});
-        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'system-output';
+        //(Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'system-output';
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {'width':1000, 'target':'system-output'}));//.target = 'system-output';
         var myPromise = Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
         });
