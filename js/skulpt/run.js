@@ -137,6 +137,13 @@ function runit() {
         var myPromise = Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
         });
+         myPromise.then(function (mod) {
+            console.log('success');
+        },
+            function (err) {
+                console.log(err.toString());
+                mypre.innerHTML = err.toString()
+            });
     }
 
     else
